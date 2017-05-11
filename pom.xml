@@ -19,6 +19,8 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<jackson.version>2.6.3</jackson.version>
+		<hibernate.version>3.6.9.Final</hibernate.version>
 	</properties>
 
 	<dependencies>
@@ -79,6 +81,18 @@
 
 		<!-- Database Connection -->
 		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-dbcp2</artifactId>
+			<version>2.1.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>2.5.1</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
 			<version>${spring.version}</version>
@@ -88,6 +102,49 @@
 			<groupId>org.hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
 			<version>${hsqldb.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+
+		<!-- Dependencies for Siebel-->
+		<dependency>
+			<groupId>com.siebel</groupId>
+			<artifactId>Siebel</artifactId>
+			<version>IP15</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.siebel</groupId>
+			<artifactId>SiebelJI_enu</artifactId>
+			<version>IP15</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.siebel</groupId>
+			<artifactId>SiebelJI_deu</artifactId>
+			<version>IP15</version>
+		</dependency>
+
+		<!-- Dependencies for Object to JSON -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
 		</dependency>
 	</dependencies>
 	<build>

@@ -1,4 +1,4 @@
-package com.boehm.siebel.deploy.svn;
+package com.boehm.siebel.deploy.dto;
 
 /**
  * Created by Christoph on 01.05.2017.
