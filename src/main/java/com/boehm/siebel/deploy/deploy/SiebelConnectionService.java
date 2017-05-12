@@ -49,7 +49,7 @@ public abstract class SiebelConnectionService {
             bean.logoff();
         }
 
-        bean.login("Siebel://NCVSAPPX02.NETCOLOGNE.INTERN:2321/X/EAIObjMgr_deu", "TRIPK", "TRIPK01");
+        bean.login("Siebel://XXX", "xxx", "xxx");
     }
 
     protected void logoff() throws SiebelException{
