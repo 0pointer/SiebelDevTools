@@ -1,6 +1,8 @@
 package com.boehm.siebel.deploy.deploy;
 
 import com.siebel.data.*;
+import com.siebel.eai.SiebelBusinessService;
+import com.siebel.eai.SiebelBusinessServiceException;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.*;
 import org.xml.sax.InputSource;
@@ -19,27 +21,6 @@ import java.util.Map;
 @Service
 public class DeploymentServiceImpl extends SiebelConnectionService implements DeploymentService {
     String respository = null;
-
-    public static void main (String[] args) throws DeploymentException{
-        DeploymentService serv = new DeploymentServiceImpl();
-        serv.importAdmFile(new AdmDTO("\\\\ncvsappx01\\TEMP\\Import\\ADM\\NC_EAI_Data_Map.xml"));
-        serv.importAdmFile(new AdmDTO("\\\\ncvsappx01\\TEMP\\Import\\ADM\\NC_EAI_Data_Map_des.xml"));
-        serv.importAdmFile(new AdmDTO("\\\\ncvsappx01\\TEMP\\Import\\ADM\\NC_LOV_NC_BIP_FORMAT_RTF.xml"));
-        serv.importAdmFile(new AdmDTO("\\\\ncvsappx01\\TEMP\\Import\\ADM\\NC_LOV_NC_TODO_TYPE_RESTRICTED.xml"));
-        serv.importAdmFile(new AdmDTO("\\\\ncvsappx01\\TEMP\\Import\\ADM\\NC_LOV_NC_TT_PARTNER_SYSTEM.xml"));
-        serv.importAdmFile(new AdmDTO("\\\\ncvsappx01\\TEMP\\Import\\ADM\\NC_LOV_NC_TT_STOERUNGSBESCHR_1.xml"));
-        serv.importAdmFile(new AdmDTO("\\\\ncvsappx01\\TEMP\\Import\\ADM\\NC_LOV_NC_TT_STOERUNGSBESCHR_2.xml"));
-        serv.importAdmFile(new AdmDTO("\\\\ncvsappx01\\TEMP\\Import\\ADM\\NC_LOV_NC_TT_STOERUNGSBESCHR_3.xml"));
-        serv.importAdmFile(new AdmDTO("\\\\ncvsappx01\\TEMP\\Import\\ADM\\NC_LOV_NC_TT_URSACHE_1.xml"));
-        serv.importAdmFile(new AdmDTO("\\\\ncvsappx01\\TEMP\\Import\\ADM\\NC_LOV_NC_TT_URSACHE_2.xml"));
-        serv.importAdmFile(new AdmDTO("\\\\ncvsappx01\\TEMP\\Import\\ADM\\NC_LOV_NC_TT_URSACHE_21.xml"));
-        serv.importAdmFile(new AdmDTO("\\\\ncvsappx01\\TEMP\\Import\\ADM\\NC_LOV_NC_TT_URSACHE_22.xml"));
-        serv.importAdmFile(new AdmDTO("\\\\ncvsappx01\\TEMP\\Import\\ADM\\NC_LOV_NC_TT_URSACHE_23.xml"));
-        serv.importAdmFile(new AdmDTO("\\\\ncvsappx01\\TEMP\\Import\\ADM\\NC_LOV_NC_TT_URSACHE_3.xml"));
-        serv.importAdmFile(new AdmDTO("\\\\ncvsappx01\\TEMP\\Import\\ADM\\NC_LOV_PERIOD_UOM.xml"));
-        serv.importAdmFile(new AdmDTO("\\\\ncvsappx01\\TEMP\\Import\\ADM\\NC_System_Preferences.xml"));
-        serv.importAdmFile(new AdmDTO("\\\\ncvsappx01\\TEMP\\Import\\ADM\\NC_System_Preferences_des.xml"));
-    }
 
     public DeploymentServiceImpl() throws DeploymentException {
         super();
@@ -182,13 +163,17 @@ public class DeploymentServiceImpl extends SiebelConnectionService implements De
     @Override
     public void exportAdmFile(List<AdmDTO> adms) throws DeploymentException {
         for (AdmDTO curAdm : adms) {
-            this.importAdmFile(curAdm);
+            this.exportAdmFile(curAdm);
         }
     }
 
     @Override
     public void exportAdmFile(AdmDTO adm) throws DeploymentException {
-
+        try {
+            SiebelService serv = this.bean.getService("");
+        } catch (SiebelException e) {
+            e.printStackTrace();
+        }
     }
 
     private String getBCName(String xmlName){

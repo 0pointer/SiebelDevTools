@@ -16,7 +16,7 @@
       <ul class="nav navbar-nav">
         <li class="active"><a href="#">SVN <span class="sr-only">(current)</span></a></li>
         <li><a href="svn/">Codeanalyse</a></li>
-        <li><a href="deploy/">Deployment</a></li>
+        <li><a href="svn/">Codeanalxxxyse</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">

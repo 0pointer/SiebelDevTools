@@ -4,9 +4,6 @@ import com.siebel.data.SiebelDataBean;
 import com.siebel.data.SiebelException;
 import com.siebel.data.SiebelPropertySet;
 
-/**
- * Created by boechr on 11.05.2017.
- */
 public abstract class SiebelConnectionService {
     protected SiebelDataBean bean = null;
 
@@ -25,7 +22,9 @@ public abstract class SiebelConnectionService {
 
             serv.invokeMethod(methodName, psIn, psOut);
         } finally {
-            serv.release();
+            if(serv != null){
+                serv.release();
+            }
         }
 
         return psOut;
@@ -50,7 +49,7 @@ public abstract class SiebelConnectionService {
             bean.logoff();
         }
 
-        bean.login("Siebel://NCVSAPPE301.NETCOLOGNE.INTERN:2321/E3/EAIObjMgr_deu", "boechr", "boechr");
+        bean.login("Siebel://NCVSAPPX02.NETCOLOGNE.INTERN:2321/X/EAIObjMgr_deu", "TRIPK", "TRIPK01");
     }
 
     protected void logoff() throws SiebelException{

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.siebel:Siebel:IP15">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/siebel/Siebel/IP15/Siebel-IP15.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/siebel/Siebel/IP15/Siebel-IP15-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/siebel/Siebel/IP15/Siebel-IP15-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
