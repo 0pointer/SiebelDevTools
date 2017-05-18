@@ -18,8 +18,7 @@ public class ToolsController {
     private ConverterService converter;
 
     @GetMapping("/converter")
-    public String converter(String name, ModelMap model) {
-        model.addAttribute("name", "XXX");
+    public String converter(ModelMap model) {
         return "converter";
     }
 
@@ -27,8 +26,16 @@ public class ToolsController {
     public @ResponseBody ConverterResultDTO convert(@RequestBody ConverterRequestDTO input) {
         if(input.getConvertType() == ConverterRequestDTO.ConvertType.TAB_TO_JIRA){
             return converter.convertTabToJira(input);
+        } else if(input.getConvertType() == ConverterRequestDTO.ConvertType.ROWID_TO_SIEBELQL){
+            return converter.convertIdToSiebelQL(input);
         } else {
             return new ConverterResultDTO("");
         }
+    }
+
+    @GetMapping("/linklist")
+    public String linklist(ModelMap model) {
+        model.addAttribute("name", "XXX");
+        return "converter";
     }
 }

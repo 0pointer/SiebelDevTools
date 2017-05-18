@@ -1,18 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
 <?xml version="1.0"?>
 <html>
 	<head>
-		<script src="http://localhost:8080/webjars/jquery/3.2.0/jquery.min.js"></script>
-		<script src="http://localhost:8080/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<link rel="stylesheet" href="http://localhost:8080/webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-		<title>Siebel Converter</title>
 	</head>
 	<body>
-	    <%@include file="includes/header.jsp" %>
 		<div class="container">
 			<div class="form-group">
 				<label for="inputTextarea">Eingabe:</label>
@@ -22,6 +12,7 @@
 				<label for="exampleSelect1">Ausgabeformat:</label>
 				<select class="form-control" id="convertSelect">
 					<option value="TAB_TO_JIRA">Tab to JIRA</option>
+					<option value="ROWID_TO_SIEBELQL">RowId to SiebelQL ([Id]='XXX')</option>
 				</select>
 			</div>
 			<div class="form-group">

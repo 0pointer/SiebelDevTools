@@ -29,4 +29,20 @@ public class ConverterServiceImpl implements ConverterService {
 
         return new ConverterResultDTO(result);
     }
+
+    @Override
+    public ConverterResultDTO convertIdToSiebelQL(ConverterRequestDTO tab) {
+        String result = "";
+        String[] tempResult;
+
+        tempResult = tab.getRequest().split("\n");
+
+        for(int i = 0; i < tempResult.length; i++){
+            result = result + "[Id]='" + tempResult[i] + "' OR ";
+        }
+
+        result = result.substring(0, result.length() - 4);
+
+        return new ConverterResultDTO(result);
+    }
 }

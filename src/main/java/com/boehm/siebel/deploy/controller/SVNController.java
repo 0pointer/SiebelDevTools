@@ -1,13 +1,11 @@
 package com.boehm.siebel.deploy.controller;
 
 import com.boehm.siebel.deploy.deploy.AdmDTO;
-import com.boehm.siebel.deploy.deploy.DeploymentDAO;
 import com.boehm.siebel.deploy.deploy.DeploymentException;
 import com.boehm.siebel.deploy.deploy.DeploymentService;
-import com.boehm.siebel.deploy.dto.ThreadDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,30 +15,23 @@ import java.util.List;
 @RequestMapping("/svn")
 public class SVNController {
     @Autowired
-    DeploymentDAO deployDAO;
-    @Autowired
-    DeploymentService deployService;
+    DeploymentService deplService;
 
-    @GetMapping("/")
-    public String merge(@RequestParam(value="name", required=false, defaultValue="World") String name, ModelMap model) {
-        model.addAttribute("name", "XXX");
-        return "svnmerge";
-    }
-
-    @PostMapping("/merge")
-    public String greeting(@ModelAttribute("thread") ThreadDTO thread) {
-        return "svnmergeresult";
-    }
-
-    @GetMapping("importAdm")
+    @GetMapping("adm")
     public String importAdm(){
-        try {
-            List<AdmDTO> lst = deployDAO.getAdmFiles("\\\\NCVSAPPx01\\TEMP\\Import\\ADM\\");
-            deployService.importAdmFile(lst);
-        } catch (DeploymentException e) {
-            e.printStackTrace();
-        }
+        return "adm";
+    }
 
-        return "admimported";
+    @RequestMapping(value = "/api/importAdm", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody String convert(@RequestBody AdmDTO input) {
+        String result;
+
+        try {
+            deplService.importAdmFile(input);
+            result = "Ok";
+        } catch (DeploymentException ex){
+            result = "Error";
+        }
+        return result;
     }
 }
