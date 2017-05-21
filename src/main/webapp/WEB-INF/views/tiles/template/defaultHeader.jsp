@@ -46,6 +46,7 @@
                <div class="input-group">
                   <span class="input-group-addon">Umgebung</span>
                   <select class="form-control">
+                     <option>-</option>
                      <option>E1</option>
                      <option>E3</option>
                      <option>U</option>

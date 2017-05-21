@@ -1,25 +1,18 @@
 package com.boehm.siebel.deploy.maintenance;
 
-import java.util.List;
+import com.boehm.siebel.deploy.siebel.SiebelBSSimulator;
+import com.boehm.siebel.deploy.siebel.SiebelTaskException;
+import org.springframework.stereotype.Service;
 
-public class MaintenanceServiceImpl implements MaintenanceService {
-    @Override
-    public List<String> getAvailableMethods() throws MaintenanceException{
-        return null;
-    }
+@Service
+public class MaintenanceServiceImpl implements  MaintenanceService {
+    @Override public void executeService(SiebelBSServiceCallDTO call) throws MaintenanceException {
+        SiebelBSSimulator bs = new SiebelBSSimulator(call);
 
-    @Override
-    public SiebelServiceCallDTO getService(String uid) throws MaintenanceException{
-        return null;
-    }
-
-    @Override
-    public List<SiebelServiceCallDTO> getService() throws MaintenanceException{
-        return null;
-    }
-
-    @Override
-    public void executeService(SiebelServiceCallDTO call) throws MaintenanceException {
-
+        try {
+            bs.execute();
+        } catch (SiebelTaskException ex){
+            throw new MaintenanceException(ex.getMessage());
+        }
     }
 }

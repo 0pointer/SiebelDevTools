@@ -1,6 +1,6 @@
 package com.boehm.siebel.deploy.controller;
 
-import com.boehm.siebel.deploy.dao.SifDAO;
+import com.boehm.siebel.deploy.deploy.SifDAO;
 import com.boehm.siebel.deploy.deploy.SifDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

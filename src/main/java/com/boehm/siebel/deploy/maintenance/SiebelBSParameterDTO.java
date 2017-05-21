@@ -1,6 +1,6 @@
 package com.boehm.siebel.deploy.maintenance;
 
-public class ParameterDTO {
+public class SiebelBSParameterDTO {
     private String key;
     private String value;
 

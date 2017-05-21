@@ -2,7 +2,7 @@ package com.boehm.siebel.deploy.maintenance;
 
 import java.util.List;
 
-public class SiebelServiceCallDTO {
+public class SiebelBSServiceCallDTO {
     private String bs;
     private String method;
 
@@ -22,13 +22,13 @@ public class SiebelServiceCallDTO {
         this.method = method;
     }
 
-    public List<ParameterDTO> getParameter() {
+    public List<SiebelBSParameterDTO> getParameter() {
         return parameter;
     }
 
-    public void setParameter(List<ParameterDTO> parameter) {
+    public void setParameter(List<SiebelBSParameterDTO> parameter) {
         this.parameter = parameter;
     }
 
-    private List<ParameterDTO> parameter;
+    private List<SiebelBSParameterDTO> parameter;
 }

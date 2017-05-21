@@ -1,6 +1,5 @@
 package com.boehm.siebel.deploy.controller;
 
-import com.boehm.siebel.deploy.dao.SifDAO;
 import com.boehm.siebel.deploy.tools.ConverterRequestDTO;
 import com.boehm.siebel.deploy.tools.ConverterResultDTO;
 import com.boehm.siebel.deploy.tools.ConverterService;
