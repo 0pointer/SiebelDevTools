@@ -1,10 +1,16 @@
 package com.boehm.siebel.deploy.siebel;
 
-import com.siebel.data.SiebelDataBean;
-import com.siebel.data.SiebelException;
-import com.siebel.data.SiebelPropertySet;
+import com.siebel.data.*;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 public abstract class SiebelAtomicTask {
+    public final static int VIEW_MODE_ALL_VIEW = 3;
+    public static boolean CONST_BC_FORWARD_ONLY = true;
+
     protected SiebelDataBean bean = null;
     private String siebelUrl;
     private String siebelUser;
@@ -32,24 +38,115 @@ public abstract class SiebelAtomicTask {
         try {
             this.login();
             this.run();
-            this.logoff();
         } catch (Exception ex){
             throw new SiebelTaskException(ex.getMessage());
+        } finally {
+            try {
+                this.logoff();
+            } catch (Exception ex){
+                //Nothing to do her
+            }
         }
     }
 
-    protected void login() throws SiebelException{
-        if(bean == null){
-            bean = new SiebelDataBean();
-        } else {
-            bean.logoff();
-        }
-
-        bean.login("", "", "");
+    protected void login() throws SiebelException {
+        bean = new SiebelDataBean();
+        bean.login(this.siebelUrl, this.siebelUser, this.siebelPw);
     }
 
     protected void logoff() throws SiebelException{
-        this.bean.logoff();
+        if(this.bean != null){
+            this.bean.logoff();
+        }
+    }
+
+    protected Map<String, String> readFieldValues(String sBo, String sBc, String searchSpec, String[] fields) throws SiebelException {
+        SiebelBusObject bo = null;
+        SiebelBusComp bc = null;
+        HashMap<String, String> result = new HashMap<>();
+
+        try {
+            bo = this.bean.getBusObject(sBo);
+            bc = bo.getBusComp(sBc);
+            bc.clearToQuery();
+
+            for(int i = 0; i < fields.length; i++){
+                bc.activateField(fields[i]);
+            }
+
+            bc.setViewMode(SiebelAtomicTask.VIEW_MODE_ALL_VIEW);
+            bc.invokeMethod("SetAdminMode", new String[]{"TRUE"});
+            bc.executeQuery(SiebelAtomicTask.CONST_BC_FORWARD_ONLY);
+
+            if(bc.firstRecord()){
+                for(int i = 0; i < fields.length; i++){
+                    result.put(fields[i], bc.getFieldValue(fields[i]));
+                }
+
+                bc.writeRecord();
+            }
+        } finally {
+            bc.release();
+            bo.release();
+        }
+
+        return result;
+    }
+
+    protected void setFieldFalues(String sBo, String sBc, String searchSpec, String[] fields, String[] values) throws SiebelException{
+        SiebelBusObject bo = null;
+        SiebelBusComp bc = null;
+
+        try {
+            bo = this.bean.getBusObject(sBo);
+            bc = bo.getBusComp(sBc);
+            bc.clearToQuery();
+
+            bc.setViewMode(SiebelAtomicTask.VIEW_MODE_ALL_VIEW);
+            bc.invokeMethod("SetAdminMode", new String[]{"TRUE"});
+            bc.executeQuery(SiebelAtomicTask.CONST_BC_FORWARD_ONLY);
+
+            for(int i = 0; i < fields.length; i++){
+                bc.activateField(fields[i]);
+            }
+
+            if(bc.firstRecord()){
+                for(int i = 0; i < fields.length; i++){
+                    bc.setFieldValue(fields[i], values[i]);
+                }
+
+                bc.writeRecord();
+            }
+        } finally {
+            bo.release();
+            bc.release();
+        }
+    }
+
+    protected void createRecord(String sBo, String sBc, String[] fields, String[] values) throws SiebelException {
+        SiebelBusObject bo = null;
+        SiebelBusComp bc = null;
+
+        try {
+            bo = this.bean.getBusObject(sBo);
+            bc = bo.getBusComp(sBc);
+
+            bc.setViewMode(SiebelAtomicTask.VIEW_MODE_ALL_VIEW);
+            bc.invokeMethod("SetAdminMode", new String[]{"TRUE"});
+            bc.executeQuery(SiebelAtomicTask.CONST_BC_FORWARD_ONLY);
+
+            bc.executeQuery(true);
+            bc.newRecord(1);
+
+            for(int i = 0; i < fields.length; i++){
+                bc.setFieldValue(fields[i], values[i]);
+            }
+
+            bc.writeRecord();
+        } finally {
+            bo.release();
+            bc.release();
+        }
     }
 
     protected SiebelPropertySet invokeService(String serviceName, String methodName, SiebelPropertySet psIn) throws SiebelException {
@@ -69,6 +166,10 @@ public abstract class SiebelAtomicTask {
         }
 
         return psOut;
+    }
+
+    protected SiebelPropertySet invokeService(String serviceName, String methodName, String[] keys, String[] values) throws SiebelException {
+        return invokeService(serviceName, methodName, this.getSimplePropertySet(keys, values));
     }
 
     protected SiebelPropertySet getSimplePropertySet(String[] keys, String[] values){
