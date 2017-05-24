@@ -12,21 +12,6 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/dev")
-public class DevController {
-    @Autowired
-    SifDAO sifDao;
+public class DevController extends ControllerTemplate {
 
-    @Autowired
-    DevController controller;
-
-    @GetMapping("/search")
-    public String search(ModelMap model) {
-        return "codesearch";
-    }
-
-    @RequestMapping(value = "/search/{query}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody
-    List<SifDTO> searchSif(@PathVariable String query){
-        return sifDao.getSifFromStorageViaXmlSearch(query);
-    }
 }

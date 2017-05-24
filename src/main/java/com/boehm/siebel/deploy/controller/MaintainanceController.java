@@ -10,9 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@SessionAttributes({"environment", "user"})
 @RequestMapping("/maintenance")
-public class MaintainanceController {
+public class MaintainanceController extends ControllerTemplate {
     @Autowired
     private SiebelBSDAO bsDao;
     @Autowired
@@ -21,7 +20,7 @@ public class MaintainanceController {
     @GetMapping("/siebservice")
     public String siebservice(String name, ModelMap model) {
         try {
-            model.addAttribute("siebelServices", bsDao.getAvailableMethods());
+            model.addAttribute("siebelServices", bsDao.getAvailableServices());
         }catch (MaintenanceException ex){
 
         }
@@ -30,7 +29,7 @@ public class MaintainanceController {
     }
 
     @RequestMapping(value = "/api/paramsiebservice", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<String> getParamSiebService(@RequestBody String uid) {
+    public @ResponseBody List<String> getParamSiebService(@RequestBody String uid) {
         List<String> params = null;
 
         try {
@@ -51,10 +50,9 @@ public class MaintainanceController {
         }
     }
 
-    @RequestMapping(value = "/api/executesiebservice", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public void executeSiebServices(@RequestBody List<SiebelBSServiceCallDTO> input) {
-        for(SiebelBSServiceCallDTO call : input){
-            this.executeSiebService(call);
+    @RequestMapping(value = "/api/executesiebservices", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public void executeSiebServices(@RequestBody List<SiebelBSParameterDTO> input) {
+        for(SiebelBSParameterDTO call : input){
         }
     }
 }

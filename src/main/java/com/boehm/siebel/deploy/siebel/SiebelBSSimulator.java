@@ -12,7 +12,7 @@ public class SiebelBSSimulator extends SiebelAtomicTask {
 
     @Override
     public void run() throws SiebelTaskException {
-        String[] key = new String[call.getParameter().size() - 1];
+        String[] key = new String[]{};
         String[] value = new String[key.length];
 
         try {

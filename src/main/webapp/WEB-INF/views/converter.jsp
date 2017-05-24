@@ -13,6 +13,7 @@
 				<select class="form-control" id="convertSelect">
 					<option value="TAB_TO_JIRA">Tab to JIRA</option>
 					<option value="ROWID_TO_SIEBELQL">RowId to SiebelQL ([Id]='XXX')</option>
+					<option value="OR_CONNECTED">OR-Verknüft('XXX' OR 'YYY')</option>
 				</select>
 			</div>
 			<div class="form-group">

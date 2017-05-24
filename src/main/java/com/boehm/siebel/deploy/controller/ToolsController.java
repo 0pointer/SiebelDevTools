@@ -1,5 +1,7 @@
 package com.boehm.siebel.deploy.controller;
 
+import com.boehm.siebel.deploy.general.EnvironmentDAO;
+import com.boehm.siebel.deploy.general.EnvironmentDTO;
 import com.boehm.siebel.deploy.tools.ConverterRequestDTO;
 import com.boehm.siebel.deploy.tools.ConverterResultDTO;
 import com.boehm.siebel.deploy.tools.ConverterService;
@@ -9,10 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
-@SessionAttributes({"environment", "user"})
 @RequestMapping("/tools")
-public class ToolsController {
+public class ToolsController extends ControllerTemplate {
     @Autowired
     private ConverterService converter;
 
@@ -27,6 +30,8 @@ public class ToolsController {
             return converter.convertTabToJira(input);
         } else if(input.getConvertType() == ConverterRequestDTO.ConvertType.ROWID_TO_SIEBELQL){
             return converter.convertIdToSiebelQL(input);
+        } else if(input.getConvertType() == ConverterRequestDTO.ConvertType.OR_CONNECTED){
+            return converter.convertViaOr(input);
         } else {
             return new ConverterResultDTO("");
         }

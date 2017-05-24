@@ -4,7 +4,7 @@ package com.boehm.siebel.deploy.tools;
  * Created by boechr on 16.05.2017.
  */
 public class ConverterRequestDTO {
-    public enum ConvertType {TAB_TO_JIRA, ROWID_TO_SIEBELQL};
+    public enum ConvertType {TAB_TO_JIRA, ROWID_TO_SIEBELQL, OR_CONNECTED};
 
     private ConvertType convertType;
     private String request;

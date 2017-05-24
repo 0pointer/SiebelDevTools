@@ -12,9 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@SessionAttributes({"environment", "user"})
 @RequestMapping("/svn")
-public class SVNController {
+public class SVNController extends ControllerTemplate {
     @Autowired
     DeploymentService deplService;
     @Autowired

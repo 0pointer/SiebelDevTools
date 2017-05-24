@@ -22,6 +22,10 @@
         <put-attribute name="title" value="ADM" />
         <put-attribute name="body" value="/WEB-INF/views/adm.jsp" />
     </definition>
+    <definition name="siebservice" extends="base-definition">
+        <put-attribute name="title" value="ADM" />
+        <put-attribute name="body" value="/WEB-INF/views/siebservice.jsp" />
+    </definition>
     <definition name="error" extends="base-definition">
         <put-attribute name="title" value="Fehlerseite" />
         <put-attribute name="body" value="/WEB-INF/views/error.jsp" />
