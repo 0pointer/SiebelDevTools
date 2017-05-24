@@ -61,7 +61,7 @@
                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-user"></span></a>
                <ul class="dropdown-menu">
                   <li><a href="#">Informationen</a></li>
-                  <li><a href="#">Abmelden</a></li>
+                  <li><a href="/logout">Abmelden</a></li>
                </ul>
             </li>
 
