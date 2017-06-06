@@ -1,5 +1,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <div class="container">
     <div class="panel panel-default">
       <div class="panel-heading">
@@ -7,16 +8,6 @@
       </div>
       <div class="panel-body">
    <form class="form-horizontal">
-      <div class="form-group">
-         <label class="control-label col-sm-2" for="email">Operation:</label>
-         <div class="col-sm-10">
-            <select class="form-control" id="convertSelect">
-               <option value="TAB_TO_JIRA">Einzelbearbeitung</option>
-               <option value="TAB_TO_JIRA">Batchverarbeitung</option>
-               <option value="TAB_TO_JIRA">SQL</option>
-            </select>
-         </div>
-      </div>
       <div class="form-group">
          <label class="control-label col-sm-2" for="folder">Methode:</label>
          <div class="col-sm-10">
@@ -30,9 +21,16 @@
          </div>
        </div>
     <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Einzugebende Parameter: Einzelbearbeitung</h3>
-      </div>
+				<div class="panel-heading" style="overflow:hidden">
+					<h3 class="panel-title">Member of the following Units
+					<div class="btn-group btn-group-sm pull-right">
+						<button type="button" class="btn  btn-danger">Einzel</button>
+						<button type="button" class="btn btn-primary">Masse</button>
+						<button type="button" class="btn btn-primary">Upload</button>
+						<button type="button" class="btn btn-primary">SQL</button>
+					</div>
+                    </h3>
+				</div>
       <div class="panel-body">
            <form class="form-horizontal" id="siebelInputValues">
 

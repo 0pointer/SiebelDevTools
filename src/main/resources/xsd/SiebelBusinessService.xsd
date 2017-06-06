@@ -5,7 +5,7 @@
                 <xs:element name="SiebelBusinessServices">
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element name="SiebelBusinessService" maxOccurs="unbounded" minOccurs="0">
+                            <xs:element name="SiebelXMLService" maxOccurs="unbounded" minOccurs="0">
                                 <xs:complexType>
                                     <xs:sequence>
                                         <xs:element name="Parameters">
@@ -15,6 +15,7 @@
                                                         <xs:complexType>
                                                             <xs:simpleContent>
                                                                 <xs:extension base="xs:string">
+                                                                    <xs:attribute type="xs:string" name="id" use="optional"/>
                                                                     <xs:attribute type="xs:string" name="name" use="optional"/>
                                                                     <xs:attribute type="xs:string" name="displayName" use="optional"/>
                                                                     <xs:attribute type="xs:string" name="description" use="optional"/>
@@ -26,11 +27,22 @@
                                             </xs:complexType>
                                         </xs:element>
                                     </xs:sequence>
-                                    <xs:attribute type="xs:string" name="guid"/>
-                                    <xs:attribute type="xs:string" name="name"/>
-                                    <xs:attribute type="xs:string" name="businessServiceName"/>
-                                    <xs:attribute type="xs:string" name="methodName"/>
-                                    <xs:attribute type="xs:string" name="description"/>
+                                    <xs:attribute type="xs:string" name="guid" use="optional"/>
+                                    <xs:attribute type="xs:string" name="name" use="optional"/>
+                                    <xs:attribute type="xs:string" name="businessServiceName" use="optional"/>
+                                    <xs:attribute type="xs:string" name="methodName" use="optional"/>
+                                    <xs:attribute type="xs:string" name="description" use="optional"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="SiebelJavaService" maxOccurs="unbounded" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:string">
+                                            <xs:attribute type="xs:string" name="type" use="optional"/>
+                                            <xs:attribute type="xs:string" name="guid" use="optional"/>
+                                            <xs:attribute type="xs:string" name="classpath" use="optional"/>
+                                        </xs:extension>
+                                    </xs:simpleContent>
                                 </xs:complexType>
                             </xs:element>
                         </xs:sequence>

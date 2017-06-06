@@ -24,7 +24,12 @@ public class SiebelBSDAOImpl implements SiebelBSDAO {
 
             Unmarshaller unmarshaller = jc.createUnmarshaller();
             SiebelScriptConfigurations db = (SiebelScriptConfigurations) unmarshaller.unmarshal(confFile);
-            for (com.boehm.siebel.deploy.generated.SiebelScriptConfigurations.SiebelBusinessServices.SiebelBusinessService bs : db.getSiebelBusinessServices().getSiebelBusinessService()) {
+
+            for (com.boehm.siebel.deploy.generated.SiebelScriptConfigurations.SiebelBusinessServices.SiebelXMLService bs : db.getSiebelBusinessServices().getSiebelXMLService()) {
+                lst.add(new SiebelBSServiceCallDTO(bs.getGuid(), bs.getName(), bs.getBusinessServiceName(), bs.getMethodName(), bs.getDescription()));
+            }
+
+            for (com.boehm.siebel.deploy.generated.SiebelScriptConfigurations.SiebelBusinessServices.SiebelXMLService bs : db.getSiebelBusinessServices().getSiebelXMLService()) {
                 lst.add(new SiebelBSServiceCallDTO(bs.getGuid(), bs.getName(), bs.getBusinessServiceName(), bs.getMethodName(), bs.getDescription()));
             }
         } catch (Exception ex){
@@ -43,9 +48,9 @@ public class SiebelBSDAOImpl implements SiebelBSDAO {
             Unmarshaller unmarshaller = jc.createUnmarshaller();
             SiebelScriptConfigurations db = (SiebelScriptConfigurations) unmarshaller.unmarshal(confFile);
 
-            for (com.boehm.siebel.deploy.generated.SiebelScriptConfigurations.SiebelBusinessServices.SiebelBusinessService bs : db.getSiebelBusinessServices().getSiebelBusinessService()) {
+            for (SiebelScriptConfigurations.SiebelBusinessServices.SiebelXMLService bs : db.getSiebelBusinessServices().getSiebelXMLService()) {
                 if(bs.getGuid().equals(guid)){
-                    for (SiebelScriptConfigurations.SiebelBusinessServices.SiebelBusinessService.Parameters.Parameter param: bs.getParameters().getParameter()){
+                    for (SiebelScriptConfigurations.SiebelBusinessServices.SiebelXMLService.Parameters.Parameter param: bs.getParameters().getParameter()){
                         params.add(param.getDisplayName());
                     }
                 }

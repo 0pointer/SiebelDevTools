@@ -23,6 +23,7 @@
                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-save-file" aria-hidden="true"></span> Deployment<span class="caret"></span></a>
                <ul class="dropdown-menu">
                   <li><a href="/svn/adm">ADM</a></li>
+                  <li><a href="/svn/merge">Merge</a></li>
                </ul>
             </li>
             <li class="dropdown">
@@ -45,17 +46,17 @@
                     </ul>
                 </li>
          </ul>
-         <form class="navbar-form navbar-right">
+         <form:form modelAttribute="environmentConfiguration" class="navbar-form navbar-right">
             <div class="form-group">
                <div class="input-group">
                   <span class="input-group-addon">Umgebung</span>
-<form:select path="availableEnvironments" class="form-control">
-      <form:option value="-" label="-"/>
-      <form:options items="${availableEnvironments}" itemValue="id" itemLabel="abbreviation"/>
- </form:select>
+                    <form:select id="environment" path="curEnvironment" class="form-control">
+                          <form:option value="-" label="-"/>
+                          <form:options items="${environmentConfiguration.environments}" itemValue="id" itemLabel="abbreviation"/>
+                     </form:select>
                </div>
             </div>
-         </form>
+         </form:form>
          <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-user"></span></a>

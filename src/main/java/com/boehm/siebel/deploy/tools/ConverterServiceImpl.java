@@ -1,5 +1,7 @@
 package com.boehm.siebel.deploy.tools;
 
+import com.boehm.siebel.deploy.tools.dto.ConverterRequestDTO;
+import com.boehm.siebel.deploy.tools.dto.ConverterResultDTO;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -31,33 +33,60 @@ public class ConverterServiceImpl implements ConverterService {
     }
 
     @Override
-    public ConverterResultDTO convertIdToSiebelQL(ConverterRequestDTO tab) {
+    public ConverterResultDTO convertIdToSiebelQL(ConverterRequestDTO input) {
+        return convertViaSign(input, "\n", "[Id]='", "'", " OR ", false);
+    }
+
+    @Override
+    public ConverterResultDTO convertViaOr(ConverterRequestDTO input) {
+        return convertViaSign(input, "\n", "'", "'", " OR ", false);
+    }
+
+    @Override
+    public ConverterResultDTO convertViaComma(ConverterRequestDTO input) {
+        return convertViaSign(input, "\n", "'", "'", ",", true);
+    }
+
+    @Override
+    public ConverterResultDTO convertViaSign(ConverterRequestDTO input, String seperator, String prefix, String suffix, String connection, boolean lineBreak) {
         String result = "";
-        String[] tempResult;
+        String curItem = "";
+        String[] items;
 
-        tempResult = tab.getRequest().split("\n");
+        items = input.getRequest().split(seperator);
+        int itemLength = items.length;
 
-        for(int i = 0; i < tempResult.length; i++){
-            result = result + "[Id]='" + tempResult[i] + "' OR ";
+        for(int i = 0; i < itemLength; i++){
+            curItem = items[i];
+            result = result + prefix + curItem + suffix;
+
+            if((i+1) < itemLength){
+                result = result + connection;
+
+                if(lineBreak){
+                    result = result + "\n";
+                }
+            }
         }
-
-        result = result.substring(0, result.length() - 4);
 
         return new ConverterResultDTO(result);
     }
 
     @Override
-    public ConverterResultDTO convertViaOr(ConverterRequestDTO lines) {
+    public ConverterResultDTO convertPsToStructure(ConverterRequestDTO input) {
         String result = "";
-        String[] tempResult;
+        /*+String str = input.getRequest();
+        String elRest = str.substring(1, str.length());
+        String elValue
+        int elNextLength = 0;
+        int elLength = 0;
 
-        tempResult = lines.getRequest().split("\n");
-
-        for(int i = 0; i < tempResult.length; i++){
-            result = result + "'" + tempResult[i] + "' OR ";
-        }
-
-        result = result.substring(0, result.length() - 4);
+        do {
+            elLength = str.indexOf("*");
+            elNextLength = new Integer(elRest.substring(0, elLength));
+            elValue
+        } while (elPosition < el.length());
+        */
 
         return new ConverterResultDTO(result);
     }

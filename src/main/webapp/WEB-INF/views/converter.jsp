@@ -1,23 +1,19 @@
-<?xml version="1.0"?>
-<html>
-	<head>
-	</head>
-	<body>
-		<div class="container">
-			<div class="form-group">
-				<label for="inputTextarea">Eingabe:</label>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
+<div class="container">
+    <div class="form-group">
+        <label for="inputTextarea">Eingabe:</label>
 				<textarea class="form-control" id="inputTextarea" rows="15"></textarea>
 			</div>
 			<div class="form-group">
 				<label for="exampleSelect1">Ausgabeformat:</label>
-				<select class="form-control" id="convertSelect">
-					<option value="TAB_TO_JIRA">Tab to JIRA</option>
-					<option value="ROWID_TO_SIEBELQL">RowId to SiebelQL ([Id]='XXX')</option>
-					<option value="OR_CONNECTED">OR-Verknüft('XXX' OR 'YYY')</option>
-				</select>
+                <form:select path="conversionTypes" class="form-control" id="convertSelect">
+                    <form:options items="${conversionTypes}" itemValue="shortName" itemLabel="fullName" />
+                </form:select>
 			</div>
 			<div class="form-group">
-				<label>Mit Überschrift: <input type="checkbox" id="hasHeaderCheckBox"></label>
+				<label>Mit &Uuml;berschrift: <input type="checkbox" id="hasHeaderCheckBox"></label>
 			</div>
 			<div class="form-group">
 				<label for="outputTextarea">Ausgabe:</label>
@@ -82,5 +78,3 @@
 			}
 		});
 	</script>
-	</body>
-</html>

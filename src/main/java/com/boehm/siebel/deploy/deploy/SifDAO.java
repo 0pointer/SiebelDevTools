@@ -1,6 +1,6 @@
 package com.boehm.siebel.deploy.deploy;
 
-import com.boehm.siebel.deploy.deploy.SifDTO;
+import com.boehm.siebel.deploy.deploy.dto.SifDTO;
 import org.springframework.stereotype.Component;
 
 import java.io.File;

@@ -1,17 +1,13 @@
 package com.boehm.siebel.deploy.controller;
 
-import com.boehm.siebel.deploy.general.EnvironmentDAO;
-import com.boehm.siebel.deploy.general.EnvironmentDTO;
-import com.boehm.siebel.deploy.tools.ConverterRequestDTO;
-import com.boehm.siebel.deploy.tools.ConverterResultDTO;
+import com.boehm.siebel.deploy.tools.dto.ConverterRequestDTO;
+import com.boehm.siebel.deploy.tools.dto.ConverterResultDTO;
 import com.boehm.siebel.deploy.tools.ConverterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/tools")
@@ -21,6 +17,7 @@ public class ToolsController extends ControllerTemplate {
 
     @GetMapping("/converter")
     public String converter(ModelMap model) {
+        model.addAttribute("conversionTypes", ConverterRequestDTO.ConvertType.values());
         return "converter";
     }
 
@@ -32,6 +29,10 @@ public class ToolsController extends ControllerTemplate {
             return converter.convertIdToSiebelQL(input);
         } else if(input.getConvertType() == ConverterRequestDTO.ConvertType.OR_CONNECTED){
             return converter.convertViaOr(input);
+        } else if(input.getConvertType() == ConverterRequestDTO.ConvertType.SIEBPS_TO_STRUCTURE) {
+            return converter.convertPsToStructure(input);
+        } else if(input.getConvertType() == ConverterRequestDTO.ConvertType.COMMA_CONNECTED) {
+            return converter.convertViaComma(input);
         } else {
             return new ConverterResultDTO("");
         }

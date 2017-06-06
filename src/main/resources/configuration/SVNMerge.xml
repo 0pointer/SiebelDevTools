@@ -1,0 +1,19 @@
+<SVNMerge>
+    <LocalPath>C:\Temp\SVNMerge</LocalPath>
+    <Repositories>
+        <Repository>
+            <Id>c9ce7ac2-20ef-4bea-9fcf-6c28d0070145</Id>
+            <Url>https://ncvsccm03p.netcologne.intern/svn/bip/branches/54.0</Url>
+            <Project>Siebel</Project>
+            <Name>Siebel 54.0</Name>
+            <LastMergeRevision></LastMergeRevision>
+        </Repository>
+        <Repository>
+            <Id>3d0288b4-7e9f-4fb4-b02b-17e8210717be</Id>
+            <Url>https://ncvsccm03p.netcologne.intern/svn/bip/branches/53.1</Url>
+            <Project>Siebel</Project>
+            <Name>Siebel 53.1</Name>
+            <LastMergeRevision></LastMergeRevision>
+        </Repository>
+    </Repositories>
+</SVNMerge>

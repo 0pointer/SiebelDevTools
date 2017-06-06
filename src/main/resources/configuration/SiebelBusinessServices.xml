@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <SiebelScriptConfigurations>
   <SiebelBusinessServices>
-    <SiebelBusinessService type="serviceCall" guid="{39facf7c-541b-4e9c-9ecf-3b7f4bd87aad}" name="Werte auf BC setzen" businessServiceName="NC PK TBE Services" methodName="SetFieldInAdminMode" description="Verändert einen Wert in der Datenbank mit Hilfe der Siebel BC Logik.">
+    <SiebelXMLService guid="{39facf7c-541b-4e9c-9ecf-3b7f4bd87aad}" name="Werte auf BC setzen" businessServiceName="NC PK TBE Services" methodName="SetFieldInAdminMode" description="Verändert einen Wert in der Datenbank mit Hilfe der Siebel BC Logik.">
       <Parameters>
         <Parameter id="val1" name="BO" displayName="Business Object" description="Das Business Object" />
         <Parameter id="val2" name="BC" displayName="Business Component" description="Die gewählte BC" />
@@ -9,6 +9,7 @@
         <Parameter id="val4" name="Field" displayName="Zu setzendes Feld" description="Der Name des Feldes" />
         <Parameter id="val5" name="Value" displayName="Zu setzender Wert" description="Der zu setzende Wert" />
       </Parameters>
-    </SiebelBusinessService>
+    </SiebelXMLService>
+    <SiebelJavaService type="javaTask" guid="{39facf7c-541b-4e9c-9ecf-3b7f4bd87aad}" classpath="com.boehm.siebel.deploy.siebel.singleTask.SiebelMigrateIADAttribute"/>
   </SiebelBusinessServices>
 </SiebelScriptConfigurations>

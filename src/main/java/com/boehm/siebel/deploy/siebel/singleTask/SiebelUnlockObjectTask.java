@@ -1,4 +1,4 @@
-package com.boehm.siebel.deploy.siebel.SingleTask;
+package com.boehm.siebel.deploy.siebel.singleTask;
 
 import com.boehm.siebel.deploy.development.SifDTO;
 import com.boehm.siebel.deploy.siebel.SiebelAtomicTask;
